@@ -1,6 +1,8 @@
 # KABA
 PC Parts E-Commerce with smart PC build recommendation
 
+Build with Laravel 12 + Livewire 3 + Tailwind v4
+
 ## Steps
 1. composer install
 2. npm install
