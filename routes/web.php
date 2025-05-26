@@ -4,12 +4,15 @@ use Livewire\Volt\Volt;
 
 Volt::route('/', 'store.index')->name('home');
 Volt::route('/wishlist', 'store.wishlist')->name('wishlist');
+Volt::route('/smartbuild', 'store.smartbuild')->name('smartbuild');
+Volt::route('/product/{product}', 'store.product')->name('product');
 
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Volt::route('/dashboard', 'dashboard.index')->name('dashboard');
     Volt::route('/dashboard/add-product', 'dashboard.add-product')->name('add-product');
     Volt::route('/dashboard/{productId}/edit', 'dashboard.edit-product')->name('edit-product');
 });
+
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');

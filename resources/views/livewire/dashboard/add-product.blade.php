@@ -28,7 +28,16 @@ new
     public string $category_id = '';
 
     #[Rule('required|string')] // Validation rules for description
-    public ?string $description = null; // Allow description to be null
+    public ?string $description = ''; // Allow description to be null
+
+    #[Rule('nullable|url|max:2048')]
+    public ?string $tokopedia_link = null;
+
+    #[Rule('nullable|url|max:2048')]
+    public ?string $shopee_link = null;
+
+    #[Rule('nullable|url|max:2048')]
+    public ?string $lazada_link = null;
 
     #[Rule('required|image|max:1024')] // Validation rules for image upload (optional, max 1MB)
     public $photo; // Property to hold the uploaded file
@@ -49,6 +58,9 @@ new
         $product->price = $validatedData['price'];
         $product->category_id = $validatedData['category_id'];
         $product->description = $validatedData['description'];
+        $product->tokopedia_link = $validatedData['tokopedia_link'];
+        $product->shopee_link = $validatedData['shopee_link'];
+        $product->lazada_link = $validatedData['lazada_link'];
 
         // Handle file upload if a photo was provided
         if ($this->photo) {
@@ -82,12 +94,21 @@ new
      */
     public function with(): array
     {
+        $config = [
+            'toolbar' => ['heading', 'bold', 'italic', '|', 'quote', 'unordered-list', 'ordered-list', 'link', '|', 'preview'],
+            'maxHeight' => '200px',
+            'spellChecker' => false, // Disables the spell checker
+            'nativeSpellcheck' => false, // Disables browser's native spell check within MDE
+            'uploadImage' => false,
+        ];
+
         $categories = Category::get()->map(function ($category) {
             return ['id' => $category->id, 'name' => $category->name];
         })->all();
 
         return [
             'categories' => $categories,
+            'config' => $config, 
         ];
     }
 }; ?>
@@ -111,14 +132,31 @@ new
 
             {{-- Product Category Input --}}
             <div class="md:col-span-2">
-                <x-mary-select label="Category" placeholder="Select a category" wire:model="category_id" :options="$categories" class="dark:text-white/90 dark:bg-zinc-950 rounded-md" />
+                <x-mary-select label="Category" placeholder="Select a category" wire:model="category_id"
+                    :options="$categories" class="dark:text-white/90 dark:bg-zinc-950 rounded-md" />
             </div>
-                
+
+            {{-- Tokopedia link input --}}
+            <div class="md:col-span-2"> {{-- Make description span two columns on medium screens and up --}}
+                <x-mary-input label="Tokopedia Link" wire:model="tokopedia_link" placeholder="Enter Tokopedia link"
+                    class="dark:text-white/90 dark:bg-zinc-950 rounded-md" />
+            </div>
+
+            {{-- Shopee link input --}}
+            <div class="md:col-span-2"> {{-- Make description span two columns on medium screens and up --}}
+                <x-mary-input label="Shopee Link" wire:model="shopee_link" placeholder="Enter Shopee link"
+                    class="dark:text-white/90 dark:bg-zinc-950 rounded-md" />
+            </div>
+
+            {{-- Lazada link input --}}
+            <div class="md:col-span-2"> {{-- Make description span two columns on medium screens and up --}}
+                <x-mary-input label="Lazada Link" wire:model="lazada_link" placeholder="Enter Lazada link"
+                    class="dark:text-white/90 dark:bg-zinc-950 rounded-md" />
+            </div>
 
             {{-- Product Description Input --}}
             <div class="md:col-span-2"> {{-- Make description span two columns on medium screens and up --}}
-                <x-mary-textarea label="Description" wire:model="description" placeholder="Enter product description"
-                    rows="8" class="dark:text-white/90 dark:bg-zinc-950 rounded-md" />
+                <x-mary-markdown wire:model="description" label="Description" :config="$config" />
             </div>
 
             {{-- Product Photo Upload --}}
@@ -152,3 +190,4 @@ new
 
 <script type="text/javascript"
     src="https://cdn.jsdelivr.net/gh/robsontenorio/mary@0.44.2/libs/currency/currency.js"></script>
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>

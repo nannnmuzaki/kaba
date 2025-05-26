@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import '../../vendor/livewire/flux/dist/flux.css';
+@plugin "@tailwindcss/typography";
 
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -111,4 +112,44 @@ select:focus[data-flux-control] {
     button, span[aria-current="page"] > span, span[aria-disabled="true"] span {
         @apply py-1 px-2
     }
+}
+
+.EasyMDEContainer h1 {
+    @apply text-4xl font-bold mb-5
+}
+ 
+.EasyMDEContainer h2 {
+    @apply text-2xl font-bold mb-3
+}
+ 
+.EasyMDEContainer h3 {
+    @apply text-lg font-bold mb-3
+}
+
+.EasyMDEContainer .CodeMirror {
+    @apply bg-zinc-950 text-white/90 border-neutral-700!
+}
+ 
+.EasyMDEContainer .CodeMirror {
+    @apply bg-zinc-950 text-white/90
+}
+ 
+.EasyMDEContainer .CodeMirror-cursor {
+    @apply border border-b-neutral-700
+}
+ 
+.EasyMDEContainer .editor-toolbar > button:hover, .EasyMDEContainer .editor-toolbar > .active {
+    @apply bg-zinc-700 text-white/90 border-neutral-700!
+}
+
+.EasyMDEContainer .editor-toolbar { 
+    @apply bg-zinc-900 text-white/90 border-neutral-700!
+}
+
+.EasyMDEContainer .editor-preview { 
+    @apply bg-zinc-900 text-white/90
+}
+
+.product-wishlist span svg {
+    @apply w-9! h-9! stroke-1!
 }

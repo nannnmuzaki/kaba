@@ -29,7 +29,16 @@ new
     public string $category_id = '';
 
     #[Rule('required|string')] // Validation rules for description
-    public ?string $description = null;
+    public ?string $description = '';
+
+    #[Rule('nullable|url|max:2048')]
+    public ?string $tokopedia_link = null;
+
+    #[Rule('nullable|url|max:2048')]
+    public ?string $shopee_link = null;
+
+    #[Rule('nullable|url|max:2048')]
+    public ?string $lazada_link = null;
 
     #[Rule('nullable|image|max:1024')] // Make photo optional for editing
     public $photo = null; // Property to hold a new uploaded file
@@ -48,8 +57,11 @@ new
         // Fill the form with existing product data
         $this->name = $this->product->name;
         $this->price = $this->product->price;
-        $this->category = $this->product->category_id;
+        $this->category_id = $this->product->category_id;
         $this->description = $this->product->description;
+        $this->tokopedia_link = $this->product->tokopedia_link;
+        $this->shopee_link = $this->product->shopee_link;
+        $this->lazada_link = $this->product->lazada_link;
         $this->currentImage = $this->product->image_path;
     }
 
@@ -66,6 +78,9 @@ new
         $this->product->price = $validatedData['price'];
         $this->product->category_id = $validatedData['category_id'];
         $this->product->description = $validatedData['description'];
+        $this->product->tokopedia_link = $validatedData['tokopedia_link'];
+        $this->product->shopee_link = $validatedData['shopee_link'];
+        $this->product->lazada_link = $validatedData['lazada_link'];
 
         // Handle file upload if a new photo was provided
         if ($this->photo) {
@@ -99,8 +114,17 @@ new
             return ['id' => $category->id, 'name' => $category->name];
         })->all();
 
+        $config = [
+            'toolbar' => ['heading', 'bold', 'italic', '|', 'quote', 'unordered-list', 'ordered-list', 'link', '|', 'preview'],
+            'maxHeight' => '200px',
+            'spellChecker' => false, // Disables the spell checker
+            'nativeSpellcheck' => false, // Disables browser's native spell check within MDE
+            'uploadImage' => false,
+        ];
+
         return [
             'categories' => $categories,
+            'config' => $config, // Configuration for the Markdown editor
         ];
     }
 }; ?>
@@ -127,11 +151,29 @@ new
                     :options="$categories" class="dark:text-white/90 dark:bg-zinc-950 rounded-md" />
             </div>
 
+            {{-- Tokopedia link input --}}
+            <div class="md:col-span-2"> {{-- Make description span two columns on medium screens and up --}}
+                <x-mary-input label="Tokopedia Link" wire:model="tokopedia_link" placeholder="Enter Tokopedia link"
+                    class="dark:text-white/90 dark:bg-zinc-950 rounded-md" />
+            </div>
+
+            {{-- Shopee link input --}}
+            <div class="md:col-span-2"> {{-- Make description span two columns on medium screens and up --}}
+                <x-mary-input label="Shopee Link" wire:model="shopee_link" placeholder="Enter Shopee link"
+                    class="dark:text-white/90 dark:bg-zinc-950 rounded-md" />
+            </div>
+
+            {{-- Lazada link input --}}
+            <div class="md:col-span-2"> {{-- Make description span two columns on medium screens and up --}}
+                <x-mary-input label="Lazada Link" wire:model="lazada_link" placeholder="Enter Lazada link"
+                    class="dark:text-white/90 dark:bg-zinc-950 rounded-md" />
+            </div>
+
             {{-- Product Description Input --}}
             <div class="md:col-span-2"> {{-- Make description span two columns on medium screens and up --}}
-                <x-mary-textarea label="Description" wire:model="description" placeholder="Enter product description"
-                    rows="8" class="dark:text-white/90 dark:bg-zinc-950 rounded-md" />
+                <x-mary-markdown wire:model="description" label="Description" :config="$config" />
             </div>
+
 
             {{-- Product Photo Upload --}}
             <div class="md:col-span-2"> {{-- Make photo upload span two columns --}}
@@ -179,3 +221,4 @@ new
 
 <script type="text/javascript"
     src="https://cdn.jsdelivr.net/gh/robsontenorio/mary@0.44.2/libs/currency/currency.js"></script>
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>

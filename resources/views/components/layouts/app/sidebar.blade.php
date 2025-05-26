@@ -3,6 +3,8 @@
 
 <head>
     @include('partials.head')
+
+    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
 </head>
 
 <body class="min-h-screen bg-white dark:bg-zinc-950">

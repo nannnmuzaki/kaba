@@ -31,7 +31,7 @@ new
                     }
                 ])
                 ->latest() // Order by latest
-                ->paginate(3), // Paginate results
+                ->paginate(20), // Paginate results
         ];
     }
 

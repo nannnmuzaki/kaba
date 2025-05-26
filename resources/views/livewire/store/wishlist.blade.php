@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 
 new
     #[Layout('components.layouts.store.app')]
-    #[Title('My Wishlist | KABA')]
+    #[Title('Wishlist')]
     class extends Component {
     use WithPagination;
     use Toast;
@@ -52,21 +52,30 @@ new
     /**
      * Removes a product from the user's wishlist.
      */
-    public function removeFromWishlist(string $productId): void
+    public function toggleWishlist(string $productId): void
     {
         $user = Auth::user();
 
         if (!$user) {
-            // This case should ideally be prevented by the modal, but as a fallback:
-            $this->showLoginModal = true;
+            // Optionally, redirect to login or show a message
+            $this->toast(
+                type: 'info',
+                title: 'Please login',
+                description: 'You need to be logged in to manage your wishlist.',
+                position: 'toast-bottom',
+                icon: 'o-exclamation-circle',
+                timeout: 3000
+            );
             return;
         }
 
+        // Find the wishlist item for this user and product
         $wishlistItem = Wishlist::where('user_id', $user->id)
             ->where('product_id', $productId)
             ->first();
 
         if ($wishlistItem) {
+            // Item exists, so remove it
             $wishlistItem->delete();
             $this->toast(
                 type: 'success',
@@ -77,12 +86,17 @@ new
                 timeout: 3000
             );
         } else {
+            // Item does not exist, so add it
+            Wishlist::create([
+                'user_id' => $user->id,
+                'product_id' => $productId,
+            ]);
             $this->toast(
-                type: 'warning',
-                title: 'Not Found',
-                description: 'Product was not found in your wishlist.',
+                type: 'success',
+                title: 'Added to Wishlist!',
+                description: 'The product has been added to your wishlist.',
                 position: 'toast-bottom',
-                icon: 'o-exclamation-triangle',
+                icon: 'o-heart',
                 timeout: 3000
             );
         }
@@ -142,7 +156,7 @@ new
             if ($foundCategory && $foundCategory['name'] !== 'All Categories') { // Ensure it's not the "All Categories" placeholder
                 $selectedCategoryDisplayName = $foundCategory['name'];
             } elseif ($foundCategory && $foundCategory['name'] === 'All Categories') {
-                    $selectedCategoryDisplayName = 'Category'; // Reset to default if "All Categories" is selected
+                $selectedCategoryDisplayName = 'Category'; // Reset to default if "All Categories" is selected
             }
         }
 
@@ -175,13 +189,14 @@ new
         </x-slot:actions>
     </x-mary-modal>
 
-    <div class="flex justify-between -mt-3 items-end">
-        <x-mary-header class="mb-0! dark:text-white/90">
-            <x-slot:title>Wishlist</x-slot:title>
+    <div class="flex flex-col sm:flex-row justify-between -mt-1 sm:-mt-3 sm:items-end">
+        <x-mary-header class="mb-2! sm:mb-0! dark:text-white/90">
+            <x-slot:title class="text-lg ml-2 sm:ml-0 sm:text-2xl">Wishlist</x-slot:title>
         </x-mary-header>
-        <div class="flex w-xs gap-2 items-center">
+        <div class="flex w-full sm:w-xs gap-2 items-center">
             <flux:dropdown>
-                <flux:navbar.item class="cursor-pointer" icon:trailing="chevron-down">{{ $selectedCategoryDisplayName }}</flux:navbar.item>
+                <flux:navbar.item class="cursor-pointer" icon:trailing="chevron-down">{{ $selectedCategoryDisplayName }}
+                </flux:navbar.item>
                 <flux:navmenu class="dark:bg-zinc-950!">
                     @foreach ($categoriesForFilter as $category)
                         <flux:navmenu.item wire:click="filterWishlistByCategory('{{ $category['id'] }}')"
@@ -212,27 +227,29 @@ new
         @else
             <div class="w-full grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-2">
                 @foreach ($products as $product)
-                    <x-mary-card class="p-0! pb-4! !bg-zinc-900 text-white overflow-hidden relative rounded-xl shadow-lg">
-                        <x-slot:figure class="relative overflow-hidden h-48 bg-zinc-900">
-                            <img src="{{ $product->image_path ? Storage::url($product->image_path) : 'https://placehold.co/600x400/27272a/404040?text=No+Image' }}"
-                                alt="{{ $product->name }}"
-                                onerror="this.onerror=null;this.src='https://placehold.co/600x400/27272a/404040?text=Error';"
-                                class="w-full h-full object-cover object-center rounded-t-xl" />
-                        </x-slot:figure>
-                        <div class="p-4 pt-2">
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="text-base font-medium text-white/90">
-                                    Rp {{ number_format($product->price, 0, '', '.') }}
+                    <a href="{{ route('product', ['product' => $product->id]) }}" class="cursor-pointer flex w-full h-full"
+                        wire:navigate>
+                        <x-mary-card
+                            class="p-0! pb-4! !bg-zinc-900 text-white overflow-hidden relative rounded-xl shadow-lg w-full h-full transition-all duration-250 ease-in-out dark:hover:bg-zinc-800!">
+                            <x-slot:figure class="relative overflow-hidden h-48 bg-transparent">
+                                <img src="{{ $product->image_path ? Storage::url($product->image_path) : 'https://placehold.co/600x400/27272a/404040?text=No+Image' }}"
+                                    alt="{{ $product->name }}" class="w-full h-full object-cover object-center rounded-t-xl" />
+                            </x-slot:figure>
+                            <div class="p-4 pt-2">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-base font-medium text-white/90">
+                                        Rp {{ number_format($product->price, 0, '', '.') }}
+                                    </span>
+                                    <x-mary-button tooltip-left="Remove from wishlist" icon="s-heart"
+                                        class="btn-circle btn-sm !bg-transparent !border-none text-red-500 hover:text-red-700"
+                                        @mousedown.stop="$wire.toggleWishlist('{{ $product->id }}')" />
+                                </div>
+                                <span class="text-sm text-white/90 leading-tight">
+                                    {{ $product->name }}
                                 </span>
-                                <x-mary-button tooltip-left="Remove from wishlist" icon="s-heart"
-                                    class="btn-circle btn-sm !bg-transparent !border-none text-red-500 hover:text-red-700"
-                                    wire:click="removeFromWishlist('{{ $product->id }}')" />
                             </div>
-                            <span class="text-sm text-white/90 leading-tight">
-                                {{ $product->name }}
-                            </span>
-                        </div>
-                    </x-mary-card>
+                        </x-mary-card>
+                    </a>
                 @endforeach
             </div>
 

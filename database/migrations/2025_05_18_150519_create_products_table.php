@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('name');
             $table->decimal('price');
             $table->text('description');
+            $table->text('tokopedia_link')->nullable();
+            $table->text('shopee_link')->nullable();
+            $table->text('lazada_link')->nullable();
             $table->string('image_path');
             $table->timestamps();
         });
