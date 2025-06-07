@@ -140,7 +140,7 @@
                                     wire:navigate>{{ __('Terms of Use') }}</a>
                             </li>
                             <li>
-                                <a href="{{ route('home') }}" class="hover:underline" wire:navigate>{{ __('FAQ') }}</a>
+                                <a href="{{ route('faq') }}" class="hover:underline" wire:navigate>{{ __('FAQ') }}</a>
                             </li>
                             <li>
                                 <a href="{{ route('home') }}" class="hover:underline"
