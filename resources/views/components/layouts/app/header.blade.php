@@ -100,8 +100,7 @@
         <flux:spacer />
 
         <flux:navlist variant="outline">
-            <flux:navlist.item icon="cpu-chip" href="{{ route('smartbuild') }}"
-                target="_blank">
+            <flux:navlist.item icon="cpu-chip" href="{{ route('smartbuild') }}" target="_blank">
                 {{ __('SmartBuild') }}
             </flux:navlist.item>
             <flux:navlist.item icon="heart" href="{{ route('wishlist') }}" target="_blank">
@@ -120,19 +119,20 @@
                     <div class="flex flex-col gap-3 md:gap-6 md:w-1/3">
                         <span class="text-base md:text-lg font-bold text-white/90">Customer Care</span>
                         <div class="flex flex-col gap-2 md:gap-4 text-xs md:text-sm font-medium text-white/80">
-                            <span>KABA Store<br>Jl. Raya Mayjen Sungkono No.KM 5, Dusun 2, Blater, Kec. Kalimanah, Kabupaten Purbalingga, Jawa Tengah 53371</span>
+                            <span>KABA Store<br>Jl. Raya Mayjen Sungkono No.KM 5, Dusun 2, Blater, Kec. Kalimanah,
+                                Kabupaten Purbalingga, Jawa Tengah 53371</span>
                             <span>Monday - Friday<br>8:00 AM - 8:00 PM WIB</span>
                             <span>Saturday - Sunday<br>8:00 AM - 6:00 PM WIB</span>
                             <span>hello@kaba.com</span>
                             <span>0811-2345-6789</span>
                         </div>
                     </div>
-    
+
                     <nav class="flex flex-col gap-3 md:gap-6 md:mx-auto">
                         <span class="text-base md:text-lg font-bold text-white/90">Quick Link</span>
                         <ul class="flex flex-col gap-2 md:gap-4 text-xs md:text-sm font-medium text-white/80">
                             <li>
-                                <a href="{{ route('home') }}" class="hover:underline"
+                                <a href="{{ route('privacy-policy') }}" class="hover:underline"
                                     wire:navigate>{{ __('Privacy Policy') }}</a>
                             </li>
                             <li>
@@ -140,8 +140,7 @@
                                     wire:navigate>{{ __('Terms of Use') }}</a>
                             </li>
                             <li>
-                                <a href="{{ route('home') }}" class="hover:underline"
-                                    wire:navigate>{{ __('FAQ') }}</a>
+                                <a href="{{ route('home') }}" class="hover:underline" wire:navigate>{{ __('FAQ') }}</a>
                             </li>
                             <li>
                                 <a href="{{ route('home') }}" class="hover:underline"
@@ -149,7 +148,7 @@
                             </li>
                         </ul>
                     </nav>
-    
+
                     <nav class="flex flex-col gap-3 md:gap-6 md:mx-auto">
                         <span class="text-base md:text-lg font-bold text-white/90">Account</span>
                         <ul class="flex flex-col gap-2 md:gap-4 text-xs md:text-sm font-medium text-white/80">
@@ -160,10 +159,10 @@
                             <li>
                                 <a href="{{ route('login') }}" class="hover:underline"
                                     wire:navigate>{{ __('Login') }}</a>
-                                    /
+                                /
                                 <a href="{{ route('register') }}" class="hover:underline"
-                                        wire:navigate>{{ __('Register') }}</a>
-                                    
+                                    wire:navigate>{{ __('Register') }}</a>
+
                             </li>
                             <li>
                                 <a href="{{ route('wishlist') }}" class="hover:underline"
@@ -171,7 +170,7 @@
                             </li>
                         </ul>
                     </nav>
-                    
+
                     <div class="flex justify-start md:ml-auto md:justify-end w-min space-x-6">
                         <a href="#" aria-label="Twitter"
                             class="size-6 fill-white/90 hover:opacity-75 transition-opacity duration-200">
