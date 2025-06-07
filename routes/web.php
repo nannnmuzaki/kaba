@@ -22,4 +22,6 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
 
+Volt::route('/privacy-policy', 'privacy-policy')->name('privacy-policy');
+
 require __DIR__.'/auth.php';
