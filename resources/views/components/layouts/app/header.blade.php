@@ -136,7 +136,7 @@
                                     wire:navigate>{{ __('Privacy Policy') }}</a>
                             </li>
                             <li>
-                                <a href="{{ route('home') }}" class="hover:underline"
+                                <a href="{{ route('terms-of-use') }}" class="hover:underline"
                                     wire:navigate>{{ __('Terms of Use') }}</a>
                             </li>
                             <li>
