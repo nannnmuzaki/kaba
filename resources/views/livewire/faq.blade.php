@@ -170,7 +170,8 @@ new
             using their highly secure and encrypted payment gateways. These are established e-commerce leaders in
             Indonesia that employ robust security measures to protect your financial information.</p>
 
-        <p>Should you have any further questions, please don't hesitate to visit our <a href="">Contact Us</a> or visit
+        <p>Should you have any further questions, please don't hesitate to visit our <a href="{{ route('contact-us') }}"
+                wire:navigate>Contact Us</a> or visit
             our physical store!</p>
     </div>
 </div>

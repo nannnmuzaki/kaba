@@ -143,7 +143,7 @@
                                 <a href="{{ route('faq') }}" class="hover:underline" wire:navigate>{{ __('FAQ') }}</a>
                             </li>
                             <li>
-                                <a href="{{ route('home') }}" class="hover:underline"
+                                <a href="{{ route('contact-us') }}" class="hover:underline"
                                     wire:navigate>{{ __('Contact') }}</a>
                             </li>
                         </ul>
