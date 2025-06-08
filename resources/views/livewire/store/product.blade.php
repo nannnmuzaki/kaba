@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use Livewire\Volt\Component;
-use Livewire\Attributes\{Layout, Title};
+use Livewire\Attributes\{Layout};
+use Illuminate\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -11,12 +12,17 @@ use Mary\Traits\Toast;
 
 new
     #[Layout('components.layouts.store.app')]
-    #[Title('Product Details')]
     class extends Component {
     use Toast;
 
+
     public Product $product;
     public Collection $relatedProducts;
+
+    public function rendering(View $view)
+    {
+        $view->title($this->product->name . ' | KABA');
+    }
 
     /**
      * Mount the component and load the main product with its wishlist status.
