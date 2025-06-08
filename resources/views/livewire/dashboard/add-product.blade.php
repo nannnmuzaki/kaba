@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Livewire\Product; // Adjust namespace if needed
-
 use App\Models\Product;
 use App\Models\Category;
 use Livewire\Volt\Component;
 use Livewire\Attributes\{Layout, Title, Rule};
 use Livewire\WithFileUploads; // Trait for file uploads
-use Illuminate\Support\Str; // For UUID generation
 use Mary\Traits\Toast; // For notifications
 
 new
@@ -108,7 +105,7 @@ new
 
         return [
             'categories' => $categories,
-            'config' => $config, 
+            'config' => $config,
         ];
     }
 }; ?>
@@ -188,6 +185,10 @@ new
     <x-mary-toast />
 </div>
 
-<script type="text/javascript"
-    src="https://cdn.jsdelivr.net/gh/robsontenorio/mary@0.44.2/libs/currency/currency.js"></script>
-<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+
+@assets
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/robsontenorio/mary@0.44.2/libs/currency/currency.js"
+    defer></script>
+<script src="https://unpkg.com/easymde/dist/easymde.min.js" defer></script>
+<link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+@endassets

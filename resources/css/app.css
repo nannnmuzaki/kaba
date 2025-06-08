@@ -112,6 +112,10 @@ select:focus[data-flux-control] {
     button, span[aria-current="page"] > span, span[aria-disabled="true"] span {
         @apply py-1 px-2
     }
+
+    select {
+        @apply dark:bg-zinc-950 dark:text-white/90 dark:border-neutral-700! text-xs rounded-sm
+    }
 }
 
 .EasyMDEContainer h1 {

@@ -6,7 +6,7 @@
 </head>
 
 <body class="min-h-screen bg-white dark:bg-zinc-950">
-    <flux:header container class="border-b border-zinc-200 bg-zinc-50 dark:border-neutral-700 dark:bg-zinc-950 py-2">
+    <flux:header container class="border-b bg-zinc-50 border-zinc-800/15 dark:border-white/20 dark:bg-zinc-950 py-2">
         <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
         <a href="{{ route('home') }}" class="ms-2 me-5 flex items-center space-x-2 rtl:space-x-reverse lg:ms-0"
@@ -27,7 +27,7 @@
             </flux:navbar.item>
         </flux:navbar>
 
-        <flux:separator orientation="vertical" class="my-2" />
+        <flux:separator orientation="vertical" variant="subtle" class="my-2" />
 
         <!-- Desktop User Menu -->
         @auth
@@ -112,12 +112,12 @@
     {{ $slot }}
 
     <footer
-        class="bg-white dark:bg-zinc-950 text-zinc-700 dark:text-white/90 pt-8 pb-4 mt-12 col-span-full border-t-1 border-t-neutral-700">
+        class="bg-white dark:bg-zinc-950 text-zinc-700 dark:text-white/90 pt-8 pb-4 mt-12 col-span-full border-t-1 border-t-zinc-800/15 dark:border-t-white/20">
         <div class="container w-5/6 mx-auto px-8 py-8 pb-16">
             <div class="flex flex-row justify-between w-full">
                 <div class="flex flex-col gap-6 md:flex-row justify-between w-full">
                     <div class="flex flex-col gap-3 md:gap-6 md:w-1/3">
-                        <span class="text-base md:text-lg font-bold text-white/90">Customer Care</span>
+                        <span class="text-sm md:text-base font-bold text-white/90">Customer Care</span>
                         <div class="flex flex-col gap-2 md:gap-4 text-xs md:text-sm font-medium text-white/80">
                             <span>KABA Store<br>Jl. Raya Mayjen Sungkono No.KM 5, Dusun 2, Blater, Kec. Kalimanah,
                                 Kabupaten Purbalingga, Jawa Tengah 53371</span>
@@ -129,7 +129,7 @@
                     </div>
 
                     <nav class="flex flex-col gap-3 md:gap-6 md:mx-auto">
-                        <span class="text-base md:text-lg font-bold text-white/90">Quick Link</span>
+                        <span class="text-sm md:text-base font-bold text-white/90">Quick Link</span>
                         <ul class="flex flex-col gap-2 md:gap-4 text-xs md:text-sm font-medium text-white/80">
                             <li>
                                 <a href="{{ route('privacy-policy') }}" class="hover:underline"
@@ -150,7 +150,7 @@
                     </nav>
 
                     <nav class="flex flex-col gap-3 md:gap-6 md:mx-auto">
-                        <span class="text-base md:text-lg font-bold text-white/90">Account</span>
+                        <span class="text-sm md:text-base font-bold text-white/90">Account</span>
                         <ul class="flex flex-col gap-2 md:gap-4 text-xs md:text-sm font-medium text-white/80">
                             <li>
                                 <a href="{{ route('settings.profile') }}" class="hover:underline"
@@ -199,7 +199,7 @@
             </div>
 
         </div>
-        <div class="pt-4 border-t border-zinc-200 dark:border-zinc-800 text-center">
+        <div class="pt-4 border-t border-zinc-200 dark:border-white/10 text-center">
             <p class="text-xs md:text-sm text-zinc-500 dark:text-white/20">
                 &copy; Copyright KABA <span>{{ date("Y") }}</span>. All rights reserved.
             </p>

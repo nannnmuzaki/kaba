@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Livewire\Volt\Component;
 use Livewire\Attributes\{Layout, Title};
 use Livewire\WithPagination;
@@ -18,20 +16,76 @@ new
     use WithPagination; // Use the WithPagination trait for pagination
     use Toast;
 
+    public string $search = '';
+    public string $selectedCategoryId = ''; // Holds the selected category ID for filtering
+    public int $perPage = 10; // Number of items per page for pagination
+
+    public function updatedSearch(): void
+    {
+        $this->resetPage();
+    }
+
+    public function updatedSelectedCategoryId(): void
+    {
+        $this->resetPage();
+    }
+
+    public function filterByCategory(string $categoryId): void
+    {
+        $this->selectedCategoryId = $categoryId;
+    }
+
+    public array $sortBy = ['column' => 'created_at', 'direction' => 'desc'];
+
     // Method to fetch the products data for the view
     public function with(): array
     {
+        // Start building the product query
+        $productsQuery = Product::query()
+            ->select(['id', 'category_id', 'name', 'price', 'created_at']) // Ensure image_path is selected if used in table
+            ->with([
+                'category' => function ($query) {
+                    $query->select('id', 'name'); // Select id and name from categories
+                }
+            ])
+            ->orderBy(...array_values($this->sortBy));
+        ;
+
+        if (!empty($this->search)) {
+            $productsQuery->where('products.name', 'like', '%' . $this->search . '%');
+        }
+
+        // Apply category filter if a category is selected
+        if ($this->selectedCategoryId) {
+            $productsQuery->where('category_id', $this->selectedCategoryId);
+        }
+
+        // Prepare categories for the filter dropdown
+        // Fetches all categories and prepends an "All Categories" option
+        $categoriesForFilter = Category::query()
+            ->select(['id', 'name'])
+            ->get()
+            ->map(function ($category) {
+                return ['id' => $category->id, 'name' => $category->name];
+            })
+            ->prepend(['id' => '', 'name' => 'All Categories']) // Use empty string ID for "All"
+            ->all();
+
+        $selectedCategoryDisplayName = 'Category'; // Default text
+        if ($this->selectedCategoryId) {
+            // Find the category name from the $categoriesForFilter array
+            $foundCategory = collect($categoriesForFilter)->firstWhere('id', $this->selectedCategoryId);
+            if ($foundCategory && $foundCategory['name'] !== 'All Categories') { // Ensure it's not the "All Categories" placeholder
+                $selectedCategoryDisplayName = $foundCategory['name'];
+            } elseif ($foundCategory && $foundCategory['name'] === 'All Categories') {
+                $selectedCategoryDisplayName = 'Category'; // Reset to default if "All Categories" is selected
+            }
+        }
+
         return [
-            // Fetch products with specific columns and eager load category name
-            'products' => Product::query()
-                ->select(['id', 'category_id', 'name', 'price', 'created_at']) // Select specific columns from products
-                ->with([
-                    'category' => function ($query) {
-                        $query->select('id', 'name'); // Select id and name from categories
-                    }
-                ])
-                ->latest() // Order by latest
-                ->paginate(20), // Paginate results
+            'products' => $productsQuery->latest()->paginate($this->perPage),
+            'categoriesForFilter' => $categoriesForFilter,    // Pass categories to the view for the dropdown
+            'selectedCategoryDisplayName' => $selectedCategoryDisplayName, // Pass the selected category name for display
         ];
     }
 
@@ -92,29 +146,45 @@ new
     <x-mary-header title="Products List" subtitle="Manage your products" class="dark:text-white/90 mb-2!" separator />
 
     {{-- Button to add a new product --}}
-    <div class="flex w-full">
+    <div class="flex w-full justify-between">
         <x-mary-button label="Add Product" icon="o-plus" link="{{ route('add-product') }}"
             class="btn-md dark:bg-zinc-800 rounded-lg border-none hover:bg-zinc-700 shrink" wire-navigate />
+
+        <flux:dropdown>
+            <flux:navbar.item class="cursor-pointer" icon:trailing="chevron-down">{{ $selectedCategoryDisplayName }}
+            </flux:navbar.item>
+            <flux:navmenu class="dark:bg-zinc-950!">
+                @foreach ($categoriesForFilter as $category)
+                    {{-- Use wire:click to call filterByCategory method --}}
+                    {{-- Pass the category ID (which is $category['id'] because of the map operation) --}}
+                    <flux:navmenu.item wire:click="filterByCategory('{{ $category['id'] }}')"
+                        class="border-b-1! dark:border-neutral-700! rounded-none first:rounded-t-sm! last:rounded-b-sm! last:border-none cursor-pointer">
+                        {{ $category['name'] }} {{-- Access 'name' key from the mapped array --}}
+                    </flux:navmenu.item>
+                @endforeach
+            </flux:navmenu>
+        </flux:dropdown>
+    </div>
+
+    <div class="flex w-full mb-1 gap-2 items-center">
+        <flux:input wire:model.live.debounce.500ms="search" class:input="dark:bg-zinc-950!" kbd="⌘K"
+            icon="magnifying-glass" placeholder="Search..." />
     </div>
 
     {{-- Define table headers --}}
     @php
         $headers = [
             ['key' => 'name', 'label' => 'Product Name'],
-            ['key' => 'category', 'label' => 'Category'],
-            ['key' => 'price', 'label' => 'Price'],
-            ['key' => 'created_at', 'label' => 'Created At'],
-            ['key' => 'actions', 'label' => 'Actions'], // Column for action buttons
+            ['key' => 'category', 'label' => 'Category', 'sortable' => false],
+            ['key' => 'price', 'label' => 'Price', 'sortBy' => 'price'],
+            ['key' => 'created_at', 'label' => 'Created At', 'sortBy' => 'created_at'],
+            ['key' => 'actions', 'label' => 'Actions', 'sortable' => false], // Column for action buttons
         ];
     @endphp
 
     {{-- Render the mary-table component --}}
-    {{-- Pass the defined headers and the $products data --}}
-    {{-- wire:key is good practice for lists, with-pagination tells mary-table to handle pagination --}}
-    <x-mary-table :headers="$headers" :rows="$products" class="text-white/90" with-pagination>
-        @scope('cell_category', $product)
-        {{ $product->category->name ?? 'N/A' }}
-        @endscope
+    <x-mary-table :headers="$headers" :rows="$products" :sort-by="$sortBy" class="text-white/90" with-pagination
+        per-page="perPage">
 
         @scope('cell_price', $product)
         {{-- Format the price using number_format for "Rp 1.000.000" style --}}
@@ -122,6 +192,19 @@ new
         Rp
         {{ number_format($product->price instanceof \Money\Money ? $product->price->getAmount() : $product->price, 0, '', '.') }}
         @endscope
+
+        @scope('cell_category', $product)
+        {{-- Display the category name --}}
+        {{ $product->category->name ?? 'Uncategorized' }}
+        @endscope
+
+        @scope('cell_created_at', $product)
+        {{-- Format the created_at date --}}
+        {{ $product->created_at->format('d/m/Y') }}<br>
+        {{ $product->created_at->format('H:i:s') }}
+        @endscope
+
+        {{-- Custom scope for the 'name' cell --}}
 
         {{-- Custom scope for the 'actions' cell --}}
         @scope('cell_actions', $product)
