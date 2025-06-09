@@ -24,7 +24,7 @@ class ProductSeeder extends Seeder
                 'tokopedia_link' => '',
                 'shopee_link' => '',
                 'lazada_link' => '',
-                'image_path' => '',
+                'image_path' => 'products/NOUbiQJyjxX4ZkSHx6Vei6kYHONPFs9JkW5Voufu.png',
                 'description' => "The ASUS ROG Strix GeForce RTX 5090 OC is a top-of-the-line graphics card designed for extreme gaming performance. It features the latest NVIDIA architecture, a massive amount of VRAM, and a robust cooling solution to handle the most demanding games and creative workloads.
 
 ### Specifications
@@ -44,7 +44,7 @@ class ProductSeeder extends Seeder
                 'tokopedia_link' => '',
                 'shopee_link' => '',
                 'lazada_link' => '',
-                'image_path' => '',
+                'image_path' => 'products/mw9re1YfPjMqy9fniqwZFr38VmTasK7Iuwp4wo2J.webp',
                 'description' => "The ASUS Dual GeForce RTX 4070 SUPER OC Edition is a performance-focused graphics card that brings the power of NVIDIA's Ada Lovelace architecture to a wider audience. It's an excellent choice for high-refresh-rate 1440p gaming.
 
 ### Specifications
@@ -64,7 +64,7 @@ class ProductSeeder extends Seeder
                 'tokopedia_link' => '',
                 'shopee_link' => '',
                 'lazada_link' => '',
-                'image_path' => '',
+                'image_path' => 'products/LQCLsD40KEDbeFhyNw5ry2VSkuAd8a5t34zByn31.png',
                 'description' => "The KLEVV CRAS C930 is a high-speed M.2 NVMe SSD that delivers exceptional read and write performance, making it ideal for gamers and content creators who need fast loading times and quick file transfers.
 
 ### Specifications
@@ -84,7 +84,7 @@ class ProductSeeder extends Seeder
                 'tokopedia_link' => 'https://www.tokopedia.com/enterkomputer/fractal-design-ion-2-660w-80-platinum-fully-modular-psu-660w?extParam=ivf%3Dfalse%26keyword%3Dfractal+design+ion%2B+2%26search_id%3D2025052413093131BD5F0B4030441F6VLQ%26src%3Dsearch&t_id=1748092182093&t_st=1&t_pp=search_result&t_efo=search_pure_goods_card&t_ef=goods_search&t_sm=&t_spt=search_result',
                 'shopee_link' => '',
                 'lazada_link' => '',
-                'image_path' => '',
+                'image_path' => 'products/pTkKpHlYpNZZWWsi45QDg3aGGnROpPIfQQmMG8b3.webp',
                 'description' => "The Fractal Design Ion+ 2 Platinum is a fully modular power supply that offers high efficiency and quiet operation. Its 860W output is sufficient for high-end gaming rigs and workstations.
 
 ### Specifications
@@ -104,7 +104,7 @@ class ProductSeeder extends Seeder
                 'tokopedia_link' => '',
                 'shopee_link' => '',
                 'lazada_link' => '',
-                'image_path' => '',
+                'image_path' => 'products/uZwcBkf71rSlaYXWfZjulqyJz3PlktLrSfKIHJKw.png',
                 'description' => "The DARKFLASH DRX70 is a mid-tower ATX case with a focus on airflow, thanks to its mesh front panel. It offers a spacious interior for easy building and compatibility with a wide range of components.
 
 ### Specifications
@@ -124,7 +124,7 @@ class ProductSeeder extends Seeder
                 'tokopedia_link' => '',
                 'shopee_link' => '',
                 'lazada_link' => '',
-                'image_path' => '',
+                'image_path' => 'products/fy0QknsgM1VdT6EsiMuS06F7x34xEP6gr9lL9NOk.webp',
                 'description' => "The AMD Ryzen 7 9800X3D is a gaming-focused processor featuring AMD's innovative 3D V-Cache technology. This provides a massive L3 cache, leading to significant performance gains in many games.
 
 ### Specifications
@@ -144,7 +144,7 @@ class ProductSeeder extends Seeder
                 'tokopedia_link' => '',
                 'shopee_link' => '',
                 'lazada_link' => '',
-                'image_path' => '',
+                'image_path' => 'products/SAERhNryo3bRnl9Uykwns9U9NEXVFZwnE0y8V8bU.png',
                 'description' => "The Sapphire NITRO+ AMD Radeon RX 9870 XT is a high-performance graphics card built on AMD's latest architecture. It's designed for exceptional 4K gaming and content creation, featuring a robust cooling system and factory overclock.
 
 ### Specifications
@@ -164,7 +164,7 @@ class ProductSeeder extends Seeder
                 'tokopedia_link' => '',
                 'shopee_link' => '',
                 'lazada_link' => '',
-                'image_path' => '',
+                'image_path' => 'products/fpDG6hSayD8C14KbdGpG8p4LP7WGYcs3NJbLZxzT.jpg',
                 'description' => "The Cooler Master MWE Gold 750 V2 is a reliable and efficient power supply that is ATX 3.0 and PCIe 5.0 ready. It's a great choice for modern builds that require stable power delivery.
 
 ### Specifications
@@ -184,7 +184,7 @@ class ProductSeeder extends Seeder
                 'tokopedia_link' => '',
                 'shopee_link' => '',
                 'lazada_link' => '',
-                'image_path' => '',
+                'image_path' => 'products/gOKHL59l219XpRElm19S0r4uWZ9dAqHW7fBSnSDs.webp',
                 'description' => "The AMD Ryzen 5 5600 is a highly popular mid-range processor that offers excellent gaming and productivity performance for its price. It's a great value option for budget-conscious builders.
 
 ### Specifications
@@ -204,7 +204,7 @@ class ProductSeeder extends Seeder
                 'tokopedia_link' => '',
                 'shopee_link' => '',
                 'lazada_link' => '',
-                'image_path' => '',
+                'image_path' => 'products/ZuBh2bTpRQroWTmWdEiVq7IFjdp1NhbFKO8o3lxo.png',
                 'description' => "The ASRock B550M Pro4 is a feature-rich micro-ATX motherboard that offers a stable platform for AMD Ryzen processors. It includes PCIe 4.0 support, dual M.2 slots, and a robust power delivery system.
 
 ### Specifications
@@ -224,7 +224,7 @@ class ProductSeeder extends Seeder
                 'tokopedia_link' => '',
                 'shopee_link' => '',
                 'lazada_link' => '',
-                'image_path' => '',
+                'image_path' => 'products/uE5xIXWwX9V0mUQ5e6G5Yzjf5nMwHJMnzS6XfhBS.jpg',
                 'description' => "The XFX Speedster SWFT 210 Radeon RX 6600 is a solid 1080p gaming graphics card based on AMD's RDNA 2 architecture. It offers a great balance of performance and price for mainstream gamers.
 
 ### Specifications
@@ -244,7 +244,7 @@ class ProductSeeder extends Seeder
                 'tokopedia_link' => '',
                 'shopee_link' => '',
                 'lazada_link' => '',
-                'image_path' => '',
+                'image_path' => 'products/inFEfpsr5qiOORX3imH6xdC8uBBDQKeVxvbyuVEE.png',
                 'description' => "The KLEVV BOLT XR is a high-performance DDR4 memory kit designed for gamers and enthusiasts. With a speed of 3600MHz, it provides the bandwidth needed for smooth gameplay and responsive multitasking.
 
 ### Specifications
