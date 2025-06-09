@@ -168,7 +168,7 @@ new
             <x-mary-button
                 tooltip-right="{{ ($product->wishlist_exists ?? false) ? 'Remove from wishlist' : 'Add to wishlist' }}"
                 icon="{{ ($product->wishlist_exists ?? false) ? 's-heart' : 'o-heart' }}"
-                class="product-wishlist !bg-transparent !border-none dark:hover:bg-zinc-800! rounded-lg p-1 text-zinc-700 dark:text-white/90 hover:text-red-500 {{ ($product->wishlist_exists ?? false) ? 'text-red-500' : 'text-white/90' }}"
+                class="product-wishlist !bg-transparent !border-none dark:hover:bg-zinc-800! rounded-lg p-1 hover:text-red-500 {{ ($product->wishlist_exists ?? false) ? 'text-red-500' : 'text-white/90' }}"
                 wire:click="toggleWishlist('{{ $product->id }}')" />
         </div>
         <div
@@ -243,10 +243,11 @@ new
     <div class="col-span-full w-full grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         @if($relatedProducts->isNotEmpty())
             @foreach ($relatedProducts as $product)
-                <a href="{{ route('product', ['product' => $product->id]) }}" class="cursor-pointer flex h-full" wire:navigate>
+                <a href="{{ route('product', ['product' => $product->id]) }}" class="cursor-pointer flex w-full h-full"
+                    wire:navigate>
                     {{-- Product Card --}}
                     <x-mary-card
-                        class="p-0! pb-4! !bg-zinc-900 text-white/90 overflow-hidden relative rounded-xl shadow-lg transition-all duration-250 ease-in-out dark:hover:bg-zinc-800!">
+                        class="p-0! pb-4! !bg-zinc-900 text-white/90 overflow-hidden relative rounded-xl shadow-lg transition-all duration-250 ease-in-out dark:hover:bg-zinc-800! w-full h-full">
                         {{-- Product Image (Figure Slot) --}}
                         <x-slot:figure class="relative overflow-hidden h-48 bg-transparent">
                             <img src="{{ $product->image_path ? Storage::url($product->image_path) : 'https://placehold.co/600x400/27272a/404040?text=No+Image' }}"

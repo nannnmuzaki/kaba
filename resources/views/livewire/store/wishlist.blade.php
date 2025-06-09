@@ -129,7 +129,7 @@ new
             if ($this->selectedCategoryId) {
                 $productsQuery->where('products.category_id', $this->selectedCategoryId);
             }
-            $productsPaginator = $productsQuery->latest('products.created_at')->paginate(3);
+            $productsPaginator = $productsQuery->latest('products.created_at')->paginate(12);
         } else {
             $productsPaginator = new LengthAwarePaginator(
                 collect(),

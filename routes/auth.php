@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use App\Http\Middleware\RedirectIfVerified;
 
 Route::middleware('guest')->group(function () {
     Volt::route('login', 'auth.login')
@@ -21,6 +22,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Volt::route('verify-email', 'auth.verify-email')
+        ->middleware([RedirectIfVerified::class])
         ->name('verification.notice');
 
     Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)

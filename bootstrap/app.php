@@ -15,6 +15,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => \App\Http\Middleware\CheckRole::class,
         ]);
     })
+    ->withMiddleware(function (Middleware $middleware) {
+        // Use a closure to defer calling the route() helper until a request is handled.
+        // We use the shorter "arrow function" syntax here.
+        $middleware->redirectUsersTo(fn () => route('home'));
+    })
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
