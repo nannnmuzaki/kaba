@@ -161,25 +161,25 @@ new
             alt="{{ $product->name }}" class="w-full h-full rounded-lg object-cover object-center">
     </div>
     <div class="flex flex-col lg:w-full">
-        <h1 class="text-lg xl:text-xl font-semibold text-white/90">{{ $product->name }}</h1>
+        <h1 class="text-lg xl:text-xl font-semibold text-zinc-800 dark:text-white/90">{{ $product->name }}</h1>
         <div class="flex flex-row gap-2 items-center mt-2">
             <span
                 class="text-sm xl:text-base font-semibold text-zinc-200 bg-zinc-700 dark:bg-zinc-800 px-4 py-2 rounded-lg">{{ $this->formatPrice($product->price) }}</span>
             <x-mary-button
                 tooltip-right="{{ ($product->wishlist_exists ?? false) ? 'Remove from wishlist' : 'Add to wishlist' }}"
                 icon="{{ ($product->wishlist_exists ?? false) ? 's-heart' : 'o-heart' }}"
-                class="product-wishlist !bg-transparent !border-none dark:hover:bg-zinc-800! rounded-lg p-1 hover:text-red-500 {{ ($product->wishlist_exists ?? false) ? 'text-red-500' : 'text-white/90' }}"
+                class="product-wishlist !bg-transparent !border-none dark:hover:bg-zinc-800! rounded-lg p-1 text-zinc-700 dark:text-white/90 hover:text-red-500 {{ ($product->wishlist_exists ?? false) ? 'text-red-500' : 'text-white/90' }}"
                 wire:click="toggleWishlist('{{ $product->id }}')" />
         </div>
         <div
-            class="prose dark:prose-invert text-xs xl:text-sm text-zinc-400 mt-4 mb-4 h-min lg:h-40 xl:h-64 lg:overflow-y-scroll">
+            class="prose dark:prose-invert text-xs xl:text-sm text-zinc-700 dark:text-zinc-400 mt-4 mb-4 h-min lg:h-40 xl:h-64 lg:overflow-y-scroll">
             {!! $product->html_description !!}
         </div>
         <flux:separator />
         <div class="flex flex-col sm:flex-row justify-between gap-4 mt-4">
             <div class="flex flex-row no-wrap gap-2 items-start w-full sm:w-2/3">
-                <flux:icon icon="map-pin" class="xl:size-8" />
-                <p class="text-xs md:text-sm dark:text-white/70">Jl. Raya Mayjen Sungkono No.KM 5, Dusun
+                <flux:icon icon="map-pin" class="text-zinc-800 dark:text-white/90 xl:size-8" />
+                <p class="text-xs md:text-sm text-zinc-700 dark:text-white/70">Jl. Raya Mayjen Sungkono No.KM 5, Dusun
                     2, Blater, Kec. Kalimanah, Kabupaten Purbalingga, Jawa Tengah 53371</p>
             </div>
             <div class="flex gap-2 items-start">

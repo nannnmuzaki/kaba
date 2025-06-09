@@ -74,7 +74,7 @@ select:focus[data-flux-control] {
 
 /** daisyUI */
 @plugin "daisyui" {
-    themes: light --default, black --prefersdark;
+    themes: corporate --default, black --prefersdark;
 }
 
 /* maryUI */
@@ -90,7 +90,7 @@ select:focus[data-flux-control] {
 
 .mary-table-pagination {
     button, span {
-        @apply  text-xs border-none text-white/90
+        @apply  text-xs border-none dark:text-white/90
     }
  
     button {
@@ -98,15 +98,15 @@ select:focus[data-flux-control] {
     }
  
     span[aria-current="page"] > span {
-        @apply bg-zinc-950
+        @apply dark:bg-zinc-950
     }
 
     span[aria-hidden="true"] {
-        @apply bg-zinc-900
+        @apply dark:bg-zinc-900
     }
 
     button[aria-current="page"] {
-        @apply bg-zinc-900
+        @apply dark:bg-zinc-900
     }
   
     button, span[aria-current="page"] > span, span[aria-disabled="true"] span {
@@ -131,27 +131,27 @@ select:focus[data-flux-control] {
 }
 
 .EasyMDEContainer .CodeMirror {
-    @apply bg-zinc-950 text-white/90 border-neutral-700!
+    @apply dark:bg-zinc-950 dark:text-white/90 dark:border-neutral-700!
 }
  
 .EasyMDEContainer .CodeMirror {
-    @apply bg-zinc-950 text-white/90
+    @apply dark:bg-zinc-950 dark:text-white/90
 }
  
 .EasyMDEContainer .CodeMirror-cursor {
-    @apply border border-b-neutral-700
+    @apply border dark:border-b-neutral-700
 }
  
 .EasyMDEContainer .editor-toolbar > button:hover, .EasyMDEContainer .editor-toolbar > .active {
-    @apply bg-zinc-700 text-white/90 border-neutral-700!
+    @apply dark:bg-zinc-700 dark:text-white/90 dark:border-neutral-700!
 }
 
 .EasyMDEContainer .editor-toolbar { 
-    @apply bg-zinc-900 text-white/90 border-neutral-700!
+    @apply dark:bg-zinc-900 dark:text-white/90 dark:border-neutral-700!
 }
 
 .EasyMDEContainer .editor-preview { 
-    @apply bg-zinc-900 text-white/90
+    @apply dark:bg-zinc-900 dark:text-white/90
 }
 
 .product-wishlist span svg {

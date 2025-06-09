@@ -112,7 +112,7 @@ new
 
 <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
     {{-- Header for the add product page --}}
-    <x-mary-header title="Add New Product" class="dark:text-white/90 mb-2!" separator />
+    <x-mary-header title="Add New Product" class="text-zinc-800 dark:text-white/90 mb-2!" separator />
 
     {{-- Form for adding a new product --}}
     {{-- wire:submit="store" calls the store method on form submission --}}

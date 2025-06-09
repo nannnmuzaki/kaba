@@ -139,13 +139,13 @@ new
         // IMPORTANT: Replace 'product_id_...' with actual IDs from your products table.
         if ($platform === 'amd' && $socket === 'AM4' && $workload === 'gaming' && $budget === '5-10jt') {
             $productIdsForBuild = [
-                'CPU' => '01970903-89e8-701f-bf9f-b2f702a4ae47',
-                'GPU' => '01970907-92b9-70a9-8a66-ab4f8c648816',
-                'RAM' => '0197090a-114c-735a-94c8-af529dc1f41e',
-                'Motherboard' => '01970909-0180-71d6-9039-22e26a9f6733',
-                'Storage' => '019708fd-070a-7326-be2d-51dfbd81522e',
-                'PSU' => '0197026a-a524-7253-beea-7ab5c1b9dae5',
-                'Case' => '0197090b-3e37-70ef-a5f4-6d391b0d4f56',
+                'CPU' => 'c9d0e1f2-a3b4-5678-9012-3def12345678',
+                'GPU' => 'e1f2a3b4-c5d6-7890-1234-5f1234567890',
+                'RAM' => 'f2a3b4c5-d6e7-8901-2345-612345678901',
+                'Motherboard' => 'd0e1f2a3-b4c5-6789-0123-4ef123456789',
+                'Storage' => 'c3d4e5f6-a7b8-9012-3456-7890abcdef12',
+                'PSU' => 'd4e5f6a7-b8c9-0123-4567-890abcdef123',
+                'Case' => 'e5f6a7b8-c9d0-1234-5678-90abcdef1234',
             ];
         }
         // --- Add more 'else if' blocks here for other combinations ---
@@ -333,7 +333,7 @@ new
         <div class="w-full mx-auto"> {{-- Increased max-width for card grid --}}
             @if ($recommendationMessage)
                 <div
-                    class="border-zinc-200 dark:border-neutral-700 rounded-xl p-8 md:p-10 md:w-2/3 mx-auto shadow-lg dark:bg-zinc-800">
+                    class="border-zinc-200 dark:border-neutral-700 rounded-xl p-8 md:p-10 md:w-2/3 mx-auto shadow-lg mt-4 dark:bg-zinc-800">
                     <h2 class="text-sm md:text-base font-semibold dark:text-white/90 mb-2">Recommendation Status</h2>
                     <p class="text-xs md:text-sm dark:text-white/80">{{ $recommendationMessage }}</p>
                 </div>

@@ -183,8 +183,8 @@ new
     @endphp
 
     {{-- Render the mary-table component --}}
-    <x-mary-table :headers="$headers" :rows="$products" :sort-by="$sortBy" class="text-white/90" with-pagination
-        per-page="perPage">
+    <x-mary-table :headers="$headers" :rows="$products" :sort-by="$sortBy" class="text-zinc-800 dark:text-white/90"
+        with-pagination per-page="perPage">
 
         @scope('cell_price', $product)
         {{-- Format the price using number_format for "Rp 1.000.000" style --}}
