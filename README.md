@@ -1,7 +1,7 @@
 # KABA
-PC Parts E-Commerce with smart PC build recommendation
+PC parts marketplace with smart PC build recommendation feature (SmartBuild)
 
-Stack: Laravel 12 + Livewire 3 + Tailwind V4
+Tech Stack: Laravel 12 + Livewire 3 + Tailwind V4
 
 ## Steps
 1. composer install
